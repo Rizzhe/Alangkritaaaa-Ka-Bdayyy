@@ -63,12 +63,22 @@
             width: 100%;
             height: 100%;
             background: url('pinterestdownloader.com-1737902666.345045.gif');
-            background-size: 150% 150%; /* Adjusted size for better visibility */
+            background-size: 150% 150%;
             animation: starAnimation 20s infinite linear;
             z-index: 0;
         }
-        audio {
-            display: none;
+        button {
+            margin-top: 20px;
+            padding: 12px 20px;
+            font-size: 16px;
+            background-color: #ff66b2;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #ff99cc;
         }
     </style>
 </head>
@@ -76,21 +86,35 @@
     <div class="background-animation"></div>
     <div class="container">
         <h1>Happy Birthday, Miss Angel!</h1>
-        <h2> It's your special day today! Enjoy kora and may you reach for the stars! I'm really very proud of you:))</h2>
+        <h2>It's your special day today! Enjoy kora and may you reach for the stars! I'm really very proud of you:))</h2>
         <p>I hope your day is filled with as much love, joy, and happiness! ❤️</p>
         <div class="heart">❤️</div>
         <a href="index.html" style="text-decoration: none;">
             <button>Take the Birthday Quiz Again</button>
         </a>
     </div>
-    <audio id="birthdaySong" autoplay>
+    <audio id="birthdaySong" preload="auto">
         <source src="NepaliSong.mp3" type="audio/mp3">
+        <source src="NepaliSong.ogg" type="audio/ogg">
         Your browser does not support the audio element.
     </audio>
+    <button id="playButton" style="display: none;">Play Birthday Song 🎵</button>
     <script>
-        window.onload = function() {
-            var audio = document.getElementById('birthdaySong');
-            audio.play();
+        window.onload = function () {
+            const audio = document.getElementById('birthdaySong');
+            const playButton = document.getElementById('playButton');
+
+            // Attempt autoplay
+            audio.play().catch(() => {
+                // If autoplay fails, show the play button
+                playButton.style.display = "inline-block";
+            });
+
+            // Play audio when play button is clicked
+            playButton.addEventListener('click', () => {
+                audio.play();
+                playButton.style.display = "none"; // Hide the button after playing
+            });
         };
     </script>
 </body>
